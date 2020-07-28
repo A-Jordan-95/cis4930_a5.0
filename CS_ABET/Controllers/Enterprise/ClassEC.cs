@@ -13,18 +13,18 @@ namespace CS_ABET.Controllers.Enterprise
 {
     public class ClassEC : BaseEC
     {
-        public async Task<IEnumerable<ClassDto>> Get(int SubjectId)
+        public async Task<IEnumerable<ClassDto>> Get(int SemesterId)
         {
             var results = new List<ClassDto>();
             using (var db = new AbetContext())
             {
                 try
                 {
-                    results = await db.Classes.Where(s => s.SubjectId == SubjectId)
+                    results = await db.Classes.Where(s => s.SemesterId == SemesterId)
                     .Select(s => 
                     new ClassDto { Id = s.Id, 
                         CourseId = s.CourseId, 
-                        SubjectId = s.SubjectId, 
+                        SemesterId = s.SemesterId, 
                         Enrollment = s.Enrollment, 
                         Instructor = s.Instructor }).ToListAsync();
                 }
@@ -44,7 +44,7 @@ namespace CS_ABET.Controllers.Enterprise
                 var c = new Class
                 {
                     Id = classDto.Id,
-                    SubjectId = classDto.SubjectId,
+                    SemesterId = classDto.SemesterId,
                     CourseId = classDto.CourseId,
                     Instructor = classDto.Instructor,
                     Enrollment = classDto.Enrollment
@@ -56,7 +56,7 @@ namespace CS_ABET.Controllers.Enterprise
                 {
                     Id = c.Id,
                     CourseId = c.CourseId,
-                    SubjectId = c.SubjectId,
+                    SemesterId = c.SemesterId,
                     Enrollment = c.Enrollment,
                     Instructor = c.Instructor
                 };
@@ -70,7 +70,7 @@ namespace CS_ABET.Controllers.Enterprise
                 var result = db.Classes.Remove(new Class
                 {
                     Id = classDto.Id,
-                    SubjectId = classDto.SubjectId,
+                    SemesterId = classDto.SemesterId,
                     CourseId = classDto.CourseId,
                     Instructor = classDto.Instructor,
                     Enrollment = classDto.Enrollment
@@ -78,7 +78,7 @@ namespace CS_ABET.Controllers.Enterprise
                 db.SaveChanges();
                 return new ClassDto { Id = result.Id,
                         CourseId = result.CourseId,
-                        SubjectId = result.SubjectId,
+                        SemesterId = result.SemesterId,
                         Enrollment = result.Enrollment,
                         Instructor = result.Instructor  };
             }
@@ -96,7 +96,7 @@ namespace CS_ABET.Controllers.Enterprise
                 {
                     Id = c.Id,
                     CourseId = c.CourseId,
-                    SubjectId = c.SubjectId,
+                    SemesterId = c.SemesterId,
                     Enrollment = c.Enrollment,
                     Instructor = c.Instructor
                 }; ;

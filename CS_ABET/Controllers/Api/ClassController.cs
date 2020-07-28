@@ -11,10 +11,10 @@ namespace CS_ABET.Controllers.Api
     public class ClassController : ApiController
     {
         [HttpGet]
-        [Route("Get/{SubjectId}")]
-        public async Task<IHttpActionResult> GetById(int SubjectId)
+        [Route("Get/{semesterId}")]
+        public async Task<IHttpActionResult> GetById(int semesterId)
         {
-            return Ok(await new ClassEC().Get(SubjectId));
+            return Ok(await new ClassEC().Get(semesterId));
         }
 
         [HttpPost]

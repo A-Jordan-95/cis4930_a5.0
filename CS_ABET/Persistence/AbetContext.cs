@@ -10,7 +10,7 @@ namespace CS_ABET.Persistence
             Configuration.ProxyCreationEnabled = false;
         }
 
-        public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<Semester> Semesters { get; set; }
 
         public virtual DbSet<Course> Courses { get; set; }
 
