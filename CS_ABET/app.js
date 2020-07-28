@@ -1,7 +1,7 @@
 ﻿var app = angular.module("ABET", ["ngRoute"]);
 app.controller('mainCtrl', function ($scope, $http) {
     $scope.nextSemester = 3;
-    //$scope.semesters = [{ id: 1, name: 'Fall2019' }, { id: 2, name: 'Spring2020' }, { id: 3, name: 'Summer2020' }];
+    
     $http({
         method: 'GET',
         url: 'api/Semester/Get'
@@ -13,9 +13,9 @@ app.controller('mainCtrl', function ($scope, $http) {
 
     $http({
         method: 'GET',
-        url:'api/Semester/GetById/2'
+        url:'api/Course/Get'
     }).then(function success(response) {
-        $scope.selectedSemester = response.data;
+        $scope.courses = response.data;
     }, function failure() {
 
     });
@@ -26,6 +26,25 @@ app.controller('mainCtrl', function ($scope, $http) {
         $scope.addingSemester = false;
         $scope.selectedClass = undefined;
         $scope.selectedSemester = semester;
+
+        $http({
+            method: 'GET',
+            url: 'api/Class/Get/' + $scope.selectedSemester.Id
+        }).then(
+            function success(response) {
+                $scope.classes = response.data;
+                for (j = 0; j < $scope.classes.length; j++) {
+                    for (i = 0; i < $scope.courses.length; i++) {
+                        if ($scope.courses[i].Id == $scope.classes[j].CourseId) {
+                            $scope.classes[j].Course = $scope.courses[i]
+                            break;
+                        }
+                    }
+                }
+            }, function failure() {
+
+            }
+        );
     }
 
     $scope.classes = [{ id: 0, course: { id: 0, courseName: 'Software Engineering 1', courseCode: 'CEN 4020' }, semesterId: 2, instructor: 'Chris Mills', syllabus: null, canvasLink: '', enrollment: 120 },
@@ -43,8 +62,32 @@ app.controller('mainCtrl', function ($scope, $http) {
     }
 
     $scope.addClass = function () {
-        $scope.selectedClass.semesterId = $scope.selectedSemester.id;
-        $scope.classes.push($scope.selectedClass);
+
+        $http({
+            method: "POST",
+            url: 'api/Class/AddOrUpdate',
+            data: {
+                Id: $scope.selectedClass.id,
+                SemesterId: $scope.selectedSemester.Id,
+                CourseId: $scope.selectedClass.Course.Id,
+                Instructor: $scope.selectedClass.Instructor,
+                Enrollment: $scope.selectedClass.Enrollment
+            }
+        }).then(
+            function success(response) {
+                var result = response.data;
+                for (i = 0; i < $scope.courses.length; i++) {
+                    if ($scope.courses[i].Id == result.CourseId) {
+                        result.Course = $scope.courses[i]
+                        break;
+                    }
+                }
+                $scope.classes.push(result);
+            }, function failure() {
+
+            }
+        );
+
         $scope.selectedClass = undefined;
         $scope.addingClass = false;
     }
@@ -83,33 +126,58 @@ app.controller('mainCtrl', function ($scope, $http) {
     }
 
     $scope.removeSemester = function (id) {
-        var indexToDelete = -1;
-        for (i = 0; i < $scope.semesters.length; i++) {
-            if ($scope.semesters[i].id === id) {
-                indexToDelete = i;
-                break;
+
+        $http({
+            method: 'GET',
+            url: 'api/Semester/RemoveById/' + id
+        }).then(function success() {
+            var indexToDelete = -1;
+            for (i = 0; i < $scope.semesters.length; i++) {
+                if ($scope.semesters[i].Id === id) {
+                    indexToDelete = i;
+                    break;
+                }
             }
-        }
-        if (indexToDelete >= 0) {
-            $scope.semesters.splice(indexToDelete, 1);
-        }
+            if (indexToDelete >= 0) {
+                $scope.semesters.splice(indexToDelete, 1);
+            }
+
+            if (id === $scope.selectedSemester.Id) {
+                $scope.selectedSemester = undefined;
+            }
+        }, function failure() {
+
+        });
+        
 
     }
 
     $scope.removeClass = function (id) {
-        var indexToDelete = -1;
-        for (i = 0; i < $scope.classes.length; i++) {
-            if ($scope.classes[i].id === id) {
-                indexToDelete = i;
-                break;
-            }
-        }
-        if (indexToDelete >= 0) {
-            $scope.classes.splice(indexToDelete, 1);
-        }
 
-        if ($scope.selectedClass.id == id) {
-            $scope.selectedClass = undefined;
-        }
+        $http({
+            method: 'GET',
+            url: 'api/Class/Remove/' + id
+        }).then(
+            function success(response) {
+                var indexToDelete = -1;
+                for (i = 0; i < $scope.classes.length; i++) {
+                    if ($scope.classes[i].Id === id) {
+                        indexToDelete = i;
+                        break;
+                    }
+                }
+                if (indexToDelete >= 0) {
+                    $scope.classes.splice(indexToDelete, 1);
+                }
+
+                if ($scope.selectedClass !== undefined && $scope.selectedClass.Id == id) {
+                    $scope.selectedClass = undefined;
+                }
+            }, function failure() {
+
+            }
+        );
+
+        
     }
 });

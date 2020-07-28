@@ -51,36 +51,38 @@
         <div style="clear:both"></div>
         <div ng-show="!addingSemester && selectedSemester !== undefined">
             <div style="float:left;width:40%">
-                <div style="width:100%;display:table-row" ng-repeat="class in classes | filter:{semesterId : selectedSemester.Id}" ng-show="selectedSemester !== undefined">
-                    <div ng-click="selectClass(class)" style="float:left;margin:15px">{{class.course.courseCode}} - {{class.course.courseName}}</div>
-                    <button class="button" style="float:left;margin-left:5px;margin-top:15px;padding:0px" ng-click="removeClass(class.id)"><i class="fas fa-window-close"></i></button>
+                <div style="width:100%;display:table-row" ng-repeat="class in classes" ng-show="selectedSemester !== undefined">
+                    <div ng-click="selectClass(class)" style="float:left;margin:15px">{{class.Course.CourseCode}} - {{class.Course.CourseName}}</div>
+                    <button class="button" style="float:left;margin-left:5px;margin-top:15px;padding:0px" ng-click="removeClass(class.Id)"><i class="fas fa-window-close"></i></button>
                 </div>
                 <div style="width:100%;display:table-row">
                     <button class="button" style="height:25px;width:50px;margin:0px 15px 15px 0px;padding:0px" ng-click="showNewClass()"><i class="fas fa-plus-square"></i></button>
                 </div>
             </div>
             <div style="float:left;width:60%;margin-top:15px" ng-show="selectedClass !== undefined && !addingClass">
-                <div style="margin:5px"><b>Instructor:</b> {{selectedClass.instructor}}</div>
-                <div style="margin:5px"><b>Enrollment:</b> {{selectedClass.enrollment}}</div>
+                <div style="margin:5px"><b>Instructor:</b> {{selectedClass.Instructor}}</div>
+                <div style="margin:5px"><b>Enrollment:</b> {{selectedClass.Enrollment}}</div>
             </div>
             <div style="float:left;width:60%;margin-top:15px" ng-show="addingClass">
 
                 <div style="display:table-row;margin-top:10px">
-                    <label style="width:30%" for="code">Class Code:</label>
-                    <input style="width:100%" id="code" ng-model="selectedClass.course.courseCode" />
+                    <div>
+                        <label style="width:30%" for="code">Class Code:</label>
+                        <select style="width:100%" id="code" ng-model="selectedClass.Course" ng-options="course as course.CourseCode for course in courses"></select>
+                    </div>
+                </div>
+                <div style="display:table-row;margin-top:10px">
+                    <label style="width:30%" for="className">Class Name:</label>
+                    <input style="width:100%" id="className" ng-model="selectedClass.Course.CourseName" />
                 </div>
 
                 <div style="display:table-row;margin-top:10px">
-                    <label style="width:30%" for="name">Class Name:</label>
-                    <input style="width:100%" id="name" ng-model="selectedClass.course.courseName" />
-                </div>
-                <div style="display:table-row;margin-top:10px">
                     <label style="width:30%" for="instructor">Instructor:</label>
-                    <input style="width:100%" id="instructor" ng-model="selectedClass.instructor" />
+                    <input style="width:100%" id="instructor" ng-model="selectedClass.Instructor" />
                 </div>
                 <div style="display:table-row;margin-top:10px">
                     <label style="width:30%" for="enrollment">Enrollment:</label>
-                    <input style="width:100%" id="enrollment" ng-model="selectedClass.enrollment" />
+                    <input style="width:100%" id="enrollment" ng-model="selectedClass.Enrollment" />
                 </div>
                 <div style="display:table-row;margin-top:15px">
                     <div style="float:right">
