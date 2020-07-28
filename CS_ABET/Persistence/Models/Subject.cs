@@ -5,8 +5,8 @@ using System.Data.Entity;
 
 namespace CS_ABET.Persistence.Models
 {
-    [Table("dbo.Semester")]
-    public class Semester
+    [Table("dbo.Subject")]
+    public class Subject
     {
         [Key]
         public int Id { get; set; }

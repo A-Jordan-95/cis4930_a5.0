@@ -15,16 +15,16 @@ using WebGrease.Css.Extensions;
 
 namespace CS_ABET.Controllers.Enterprise
 {
-    public class SemesterEC : BaseEC
+    public class SubjectEC : BaseEC
     {
-        public async Task<IEnumerable<SemesterDto>> Get()
+        public async Task<IEnumerable<SubjectDto>> Get()
         {
-            var results = new List<SemesterDto>();
+            var results = new List<SubjectDto>();
             using(var db = new AbetContext())
             {
                 try
                 {
-                    results = await db.Semesters.Select(s => new SemesterDto { Id = s.Id, Name = s.Name }).ToListAsync();
+                    results = await db.Subjects.Select(s => new SubjectDto { Id = s.Id, Name = s.Name }).ToListAsync();
                 } catch(Exception e)
                 {
 
@@ -34,38 +34,38 @@ namespace CS_ABET.Controllers.Enterprise
             return results;
         }
 
-        public async Task<SemesterDto> GetById(int id)
+        public async Task<SubjectDto> GetById(int id)
         {
             using (var db = new AbetContext())
             {
-                return await db.Semesters.Where(s => s.Id == id)?.Take(1).Select(s => new SemesterDto { Id = s.Id, Name = s.Name }).FirstOrDefaultAsync();
+                return await db.Subjects.Where(s => s.Id == id)?.Take(1).Select(s => new SubjectDto { Id = s.Id, Name = s.Name }).FirstOrDefaultAsync();
             }
 
         }
 
-        public async Task<IEnumerable<SemesterDto>> Search(string query)
+        public async Task<IEnumerable<SubjectDto>> Search(string query)
         {
 
             using (var db = new AbetContext())
             {
-                return await db.Semesters
+                return await db.Subjects
                     .Where(s => s.Name.ToUpper().Contains(query.ToUpper()))
-                    .Select(s => new SemesterDto { Id = s.Id, Name = s.Name })
+                    .Select(s => new SubjectDto { Id = s.Id, Name = s.Name })
                     .ToListAsync();
             }
 
         }
 
 
-        public async Task <SemesterDto> AddOrUpdate(SemesterDto semesterDto)
+        public async Task <SubjectDto> AddOrUpdate(SubjectDto SubjectDto)
         {
-            var newSemester = new Semester { Id = semesterDto.Id, Name = semesterDto.Name, LastModified = DateTime.Now };
+            var newSubject = new Subject { Id = SubjectDto.Id, Name = SubjectDto.Name, LastModified = DateTime.Now };
             using (var db = new AbetContext())
             {
                 try
                 {
                     
-                    db.Semesters.AddOrUpdate(newSemester);
+                    db.Subjects.AddOrUpdate(newSubject);
                     await db.SaveChangesAsync();
                 } catch(Exception e)
                 {
@@ -74,25 +74,25 @@ namespace CS_ABET.Controllers.Enterprise
             }
 
 
-            return new SemesterDto { Id = newSemester.Id, Name = newSemester.Name };
+            return new SubjectDto { Id = newSubject.Id, Name = newSubject.Name };
         }
 
-        public SemesterDto Remove(SemesterDto semesterDto)
+        public SubjectDto Remove(SubjectDto SubjectDto)
         {
             using (var db = new AbetContext())
             {
-                var result = db.Semesters.Remove(new Semester { Id = semesterDto.Id, Name = semesterDto.Name });
+                var result = db.Subjects.Remove(new Subject { Id = SubjectDto.Id, Name = SubjectDto.Name });
                 db.SaveChanges();
-                return new SemesterDto { Id = result.Id, Name = result.Name };
+                return new SubjectDto { Id = result.Id, Name = result.Name };
             }
         }
 
-        public async Task<Semester> RemoveById(int id)
+        public async Task<Subject> RemoveById(int id)
         {
             using (var db = new AbetContext())
             {
-                var toRemove = db.Semesters.FirstOrDefault(s => s.Id == id);
-                db.Semesters.Remove(toRemove);
+                var toRemove = db.Subjects.FirstOrDefault(s => s.Id == id);
+                db.Subjects.Remove(toRemove);
                 await db.SaveChangesAsync();
                 return toRemove;
             }

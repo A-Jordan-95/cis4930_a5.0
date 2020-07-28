@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace CS_ABET.Persistence.DTO
 {
-    public class SemesterDto
+    public class SubjectDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
