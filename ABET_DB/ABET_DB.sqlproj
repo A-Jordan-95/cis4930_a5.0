@@ -61,5 +61,6 @@
     <Build Include="Semester.sql" />
     <Build Include="Class.sql" />
     <Build Include="Course.sql" />
+    <Build Include="Review.sql" />
   </ItemGroup>
 </Project>
