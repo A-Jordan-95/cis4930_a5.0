@@ -61,7 +61,6 @@
             </div>
             <div style="float:left;width:60%;margin-top:15px" ng-show="selectedClass !== undefined && !addingClass">
                 <div style="margin:5px"><b>Instructor:</b> {{selectedClass.Instructor}}</div>
-                <div style="margin:5px"><b>Enrollment:</b> {{selectedClass.Enrollment}}</div>
             </div>
             <div style="float:left;width:60%;margin-top:15px" ng-show="addingClass">
 
@@ -79,10 +78,6 @@
                 <div style="display:table-row;margin-top:10px">
                     <label style="width:30%" for="instructor">Instructor:</label>
                     <input style="width:100%" id="instructor" ng-model="selectedClass.Instructor" />
-                </div>
-                <div style="display:table-row;margin-top:10px">
-                    <label style="width:30%" for="enrollment">Enrollment:</label>
-                    <input style="width:100%" id="enrollment" ng-model="selectedClass.Enrollment" />
                 </div>
                 <div style="display:table-row;margin-top:15px">
                     <div style="float:right">

@@ -47,8 +47,8 @@ app.controller('mainCtrl', function ($scope, $http) {
         );
     }
 
-    //$scope.classes = [{ Id: 0, course: { Id: 0, courseName: 'Software Engineering 1', courseCode: 'CEN 4020' }, semesterId: 2, instructor: 'Chris Mills', syllabus: null, canvasLink: '', enrollment: 120 },
-    //    { Id: 1, course: { Id: 1, courseName: 'C# Application Development', courseCode: 'CIS 4930' }, semesterId: 1, instructor: 'Chris Mills', syllabus: null, canvasLink: '', enrollment: 17 }];
+    //$scope.classes = [{ Id: 0, course: { Id: 0, courseName: 'Software Engineering 1', courseCode: 'CEN 4020' }, semesterId: 2, instructor: 'Chris Mills', syllabus: null, canvasLink: '' },
+    //    { Id: 1, course: { Id: 1, courseName: 'C# Application Development', courseCode: 'CIS 4930' }, semesterId: 1, instructor: 'Chris Mills', syllabus: null, canvasLink: '' }];
 
     $scope.selectClass = function (cl) {
         $scope.addingClass = false;
@@ -70,8 +70,7 @@ app.controller('mainCtrl', function ($scope, $http) {
                 Id: $scope.selectedClass.id,
                 SemesterId: $scope.selectedSemester.Id,
                 CourseId: $scope.selectedClass.Course.Id,
-                Instructor: $scope.selectedClass.Instructor,
-                Enrollment: $scope.selectedClass.Enrollment
+                Instructor: $scope.selectedClass.Instructor
             }
         }).then(
             function success(response) {
