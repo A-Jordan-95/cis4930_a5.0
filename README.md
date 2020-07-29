@@ -5,6 +5,8 @@
 - Contributors:
     - Alexander Jordan:
       - work performed:
+        - Changed application main heading, changed dropdown menu in add class to a text input box
+        - commented out hardcoded entries for classes in app.js, changed label of semester input field to 'subject'
       
     - Anthony Micciche:
       - work performed:
