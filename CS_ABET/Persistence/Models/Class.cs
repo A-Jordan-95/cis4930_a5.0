@@ -17,10 +17,5 @@ namespace CS_ABET.Persistence.Models
 
         public string Instructor { get; set; }
 
-        public byte[] Syllabus { get; set; }
-
-        public string CanvasLink { get; set; }
-
-        public int Enrollment { get; set; }
     }
 }

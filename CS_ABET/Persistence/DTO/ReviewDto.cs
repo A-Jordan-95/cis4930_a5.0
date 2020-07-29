@@ -9,6 +9,8 @@ namespace CS_ABET.Persistence.DTO
     {
         public int Id { get; set; }
 
+        public int ClassId { get; set; }
+
         public int RatingOutOfFive { get; set; }
 
         public string ReviewText { get; set; }

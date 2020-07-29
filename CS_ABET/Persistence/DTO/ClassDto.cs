@@ -14,7 +14,5 @@ namespace CS_ABET.Persistence.DTO
         public int SemesterId { get; set; }
 
         public string Instructor { get; set; }
-
-        public int Enrollment { get; set; }
     }
 }

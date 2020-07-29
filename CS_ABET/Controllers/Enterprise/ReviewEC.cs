@@ -26,6 +26,7 @@ namespace CS_ABET.Controllers.Enterprise
                     {
                         Id = s.Id,
                         RatingOutOfFive = s.RatingOutOfFive,
+                        ClassId = s.ClassId,
                         ReviewText = s.ReviewText
                     }).ToListAsync();
                 }
@@ -50,6 +51,7 @@ namespace CS_ABET.Controllers.Enterprise
                     {
                         Id = s.Id,
                         RatingOutOfFive = s.RatingOutOfFive,
+                        ClassId = s.ClassId,
                         ReviewText = s.ReviewText
                     }).ToListAsync();
                 }
@@ -62,40 +64,43 @@ namespace CS_ABET.Controllers.Enterprise
             return results;
         }
 
-        public async Task<ReviewDto> AddOrUpdate(ReviewDto courseDto)
+        public async Task<ReviewDto> AddOrUpdate(ReviewDto reviewDto)
         {
             using (var db = new AbetContext())
             {
                 db.Reviews.AddOrUpdate(
                         new Review
                         {
-                            Id = courseDto.Id,
-                            RatingOutOfFive = courseDto.RatingOutOfFive,
-                            ReviewText = courseDto.ReviewText
+                            Id = reviewDto.Id,
+                            RatingOutOfFive = reviewDto.RatingOutOfFive,
+                            ClassId = reviewDto.ClassId,
+                            ReviewText = reviewDto.ReviewText
                         });
                 await db.SaveChangesAsync();
             }
 
 
-            return courseDto;
+            return reviewDto;
         }
 
-        public ReviewDto Remove(ReviewDto courseDto)
+        public ReviewDto Remove(ReviewDto reviewDto)
         {
             using (var db = new AbetContext())
             {
                 var result = db.Reviews.Remove(new Review
                 {
-                    Id = courseDto.Id,
-                    RatingOutOfFive = courseDto.RatingOutOfFive,
-                    ReviewText = courseDto.ReviewText
+                    Id = reviewDto.Id,
+                    RatingOutOfFive = reviewDto.RatingOutOfFive,
+                    ClassId = reviewDto.ClassId,
+                    ReviewText = reviewDto.ReviewText
                 });
                 db.SaveChanges();
                 return new ReviewDto
                 {
                     Id = result.Id,
-                    RatingOutOfFive = courseDto.RatingOutOfFive,
-                    ReviewText = courseDto.ReviewText
+                    RatingOutOfFive = reviewDto.RatingOutOfFive,
+                    ClassId = reviewDto.ClassId,
+                    ReviewText = reviewDto.ReviewText
                 };
             }
         }

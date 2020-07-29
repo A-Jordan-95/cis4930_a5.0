@@ -25,7 +25,6 @@ namespace CS_ABET.Controllers.Enterprise
                     new ClassDto { Id = s.Id, 
                         CourseId = s.CourseId, 
                         SemesterId = s.SemesterId, 
-                        Enrollment = s.Enrollment, 
                         Instructor = s.Instructor }).ToListAsync();
                 }
                 catch (Exception e)
@@ -47,7 +46,6 @@ namespace CS_ABET.Controllers.Enterprise
                     SemesterId = classDto.SemesterId,
                     CourseId = classDto.CourseId,
                     Instructor = classDto.Instructor,
-                    Enrollment = classDto.Enrollment
                 };
                 db.Classes.AddOrUpdate(c);
                 await db.SaveChangesAsync();
@@ -57,7 +55,6 @@ namespace CS_ABET.Controllers.Enterprise
                     Id = c.Id,
                     CourseId = c.CourseId,
                     SemesterId = c.SemesterId,
-                    Enrollment = c.Enrollment,
                     Instructor = c.Instructor
                 };
             }
@@ -72,14 +69,12 @@ namespace CS_ABET.Controllers.Enterprise
                     Id = classDto.Id,
                     SemesterId = classDto.SemesterId,
                     CourseId = classDto.CourseId,
-                    Instructor = classDto.Instructor,
-                    Enrollment = classDto.Enrollment
+                    Instructor = classDto.Instructor
                 });
                 db.SaveChanges();
                 return new ClassDto { Id = result.Id,
                         CourseId = result.CourseId,
                         SemesterId = result.SemesterId,
-                        Enrollment = result.Enrollment,
                         Instructor = result.Instructor  };
             }
         }
@@ -97,7 +92,6 @@ namespace CS_ABET.Controllers.Enterprise
                     Id = c.Id,
                     CourseId = c.CourseId,
                     SemesterId = c.SemesterId,
-                    Enrollment = c.Enrollment,
                     Instructor = c.Instructor
                 }; ;
             }
