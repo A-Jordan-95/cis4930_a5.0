@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -30,17 +30,16 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         .menu-item {
             cursor: default;
         }
     </style>
     <div ng-app="ABET" ng-controller="mainCtrl">
         <h1>Anthony and Alex's Mondo Course Review System</h1>
-        <div style="border-bottom:solid">
+        <div style="border-bottom:solid">           
             <div ng-repeat="semester in semesters">
                 <div ng-click="selectSemester(semester)" style="float:left;margin:15px;padding:3px">
-                    <div class="menu-item" style="float:left;margin-right:5px">{{semester.Name}}</div>
+                    <div class="menu-item" style="float:left;margin-right:5px">{{semester.Name}} </div>
                     <button class="button" style="float:left;margin-left:5px;margin-top:3px;padding:0px" ng-click="removeSemester(semester.Id)"><i class="fas fa-window-close"></i></button>
                 </div>
             </div>
@@ -50,45 +49,69 @@
         </div>
         <div style="clear:both"></div>
         <div ng-show="!addingSemester && selectedSemester !== undefined">
+            <h3> Displaying classes for {{selectedSemester.Name}} </h3>
             <div style="float:left;width:40%">
                 <div style="width:100%;display:table-row" ng-repeat="class in classes" ng-show="selectedSemester !== undefined">
-                    <div ng-click="selectClass(class)" style="float:left;margin:15px">{{class.CourseCode}} - {{class.CourseName}}</div>
+                    <div ng-click="selectClass(class)" style="float:left;margin:15px">{{class.CourseCode}} - {{class.CourseName}} <b>Instructor:</b> {{class.Instructor}}</div>
                     <button class="button" style="float:left;margin-left:5px;margin-top:15px;padding:0px" ng-click="removeClass(class.Id)"><i class="fas fa-window-close"></i></button>
                 </div>
-                <div style="width:100%;display:table-row">
-                    <button class="button" style="height:25px;width:50px;margin:0px 15px 15px 0px;padding:0px" ng-click="showNewClass()"><i class="fas fa-plus-square"></i></button>
+                <div ng-click="showNewClass()" style="float:left;margin:15px;padding:3px">
+                    <button class="button" style="float:left;margin-left:5px;margin-top:3px;padding:0px"><i class="fas fa-plus-square"></i></button>
                 </div>
             </div>
-            <div style="float:left;width:60%;margin-top:15px" ng-show="selectedClass !== undefined && !addingClass">
-                <div style="margin:5px"><b>Instructor:</b> {{selectedClass.Instructor}}</div>
-            </div>
-            <div style="float:left;width:60%;margin-top:15px" ng-show="addingClass">
-
-                <div style="display:table-row;margin-top:10px">
-                    <div>
-                        <label style="width:30%" for="code">Class Code:</label>
-                        <input style="width:100%" id="code" ng-model="selectedClass.CourseCode" />
+            <div style="clear:both"></div>
+            <div ng-show="!addingClass && selectedClass !== undefined">
+                <h4> Reviews for {{selectedClass.CourseName}} with {{selectedClass.Instructor}}: </h4>
+                <div style="float:left;width:40%">
+                    <div style="width:100%;display:table-row" ng-repeat="review in reviews | filter:{ClassId : selectedClass.Id}">
+                        <div  style="float:left;margin:15px">{{review.Rating}} / 5 - {{review.Text}}</div>
+                        <button class="button" style="float:left;margin-left:5px;margin-top:15px;padding:0px" ng-click="removeReview(review.Id)"><i class="fas fa-window-close"></i></button>
+                    </div>
+                    <div ng-click="showNewReview()" style="float:left;margin:15px;padding:3px">
+                        <button class="button" style="float:left;margin-left:5px;margin-top:3px;padding:0px"><i class="fas fa-plus-square"></i></button>
                     </div>
                 </div>
-                <div style="display:table-row;margin-top:10px">
-                    <label style="width:30%" for="className">Class Name:</label>
-                    <input style="width:100%" id="className" ng-model="selectedClass.CourseName" />
+                <div style="float:left;width:60%;margin-top:15px" ng-show="addingReview">
+                    <h4> Add a review for {{selectedClass.CourseName}} with {{selectedClass.Instructor}}:</h4>
+                    <div style="display:table-row;margin-top:10px">
+                        <label style="width:30%" for="code">Rating out of 5:</label>
+                        <input style="width:100%" id="code" ng-model="selectedReview.rating" />
+                    </div>
+                    <div style="display:table-row;margin-top:10px">
+                        <label style="width:30%" for="name">Review:</label>
+                        <input style="width:100%" id="name" ng-model="selectedReview.Text" />
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="float:right">
+                        <button class="button-bordered" ng-click="cancelAddReview()">Cancel</button>
+                        <button class="button-bordered" style="padding:15px 0px 15px 15px" ng-click="addReview()">Ok</button>
+                    </div>
                 </div>
-
+            </div>
+            
+            <div style="float:left;width:60%;margin-top:15px" ng-show="addingClass">
+                <h4> Add a class to {{selectedSemester.Name}} </h4>
+                <div style="display:table-row;margin-top:10px">
+                    <label style="width:30%" for="code">Class Code:</label>
+                    <input style="width:100%" id="code" ng-model="selectedClass.CourseCode" />
+                </div>
+                <div style="display:table-row;margin-top:10px">
+                    <label style="width:30%" for="name">Class Name:</label>
+                    <input style="width:100%" id="name" ng-model="selectedClass.CourseName" />
+                </div>
                 <div style="display:table-row;margin-top:10px">
                     <label style="width:30%" for="instructor">Instructor:</label>
                     <input style="width:100%" id="instructor" ng-model="selectedClass.Instructor" />
                 </div>
-                <div style="display:table-row;margin-top:15px">
-                    <div style="float:right">
-                        <button class="button-bordered" ng-click="cancelAddClass()">Cancel</button>
-                        <button class="button-bordered" style="padding:15px 0px 15px 15px" ng-click="addClass()">Ok</button>
-                    </div>
+                <div style="clear:both"></div>
+                <div style="float:right">
+                    <button class="button-bordered" ng-click="cancelAddClass()">Cancel</button>
+                    <button class="button-bordered" style="padding:15px 0px 15px 15px" ng-click="addClass()">Ok</button>
                 </div>
             </div>
         </div>
         <div ng-show="addingSemester" style="width:30%">
-            <label for="name">Subject Name:</label>
+            <label for="name">Semester Name:</label>
             <input id="name" ng-model="selectedSemester.Name" />
             <div style="clear:both"></div>
             <div style="float:right">
