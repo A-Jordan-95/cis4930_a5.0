@@ -11,16 +11,6 @@ app.controller('mainCtrl', function ($scope, $http) {
 
     });
 
-    $http({
-        method: 'GET',
-        url:'api/Course/Get'
-    }).then(function success(response) {
-        $scope.courses = response.data;
-    }, function failure() {
-
-    });
-
-    
 
     $scope.selectSemester = function (semester) {
         $scope.addingSemester = false;
@@ -33,22 +23,11 @@ app.controller('mainCtrl', function ($scope, $http) {
         }).then(
             function success(response) {
                 $scope.classes = response.data;
-                for (j = 0; j < $scope.classes.length; j++) {
-                    for (i = 0; i < $scope.courses.length; i++) {
-                        if ($scope.courses[i].Id == $scope.classes[j].CourseId) {
-                            $scope.classes[j].Course = $scope.courses[i]
-                            break;
-                        }
-                    }
-                }
             }, function failure() {
 
             }
         );
     }
-
-    //$scope.classes = [{ Id: 0, course: { Id: 0, courseName: 'Software Engineering 1', courseCode: 'CEN 4020' }, semesterId: 2, instructor: 'Chris Mills', syllabus: null, canvasLink: '' },
-    //    { Id: 1, course: { Id: 1, courseName: 'C# Application Development', courseCode: 'CIS 4930' }, semesterId: 1, instructor: 'Chris Mills', syllabus: null, canvasLink: '' }];
 
     $scope.selectClass = function (cl) {
         $scope.addingClass = false;
@@ -58,7 +37,6 @@ app.controller('mainCtrl', function ($scope, $http) {
     $scope.showNewClass = function () {
         $scope.addingClass = true;
         $scope.selectedClass = new Object();
-        $scope.selectedClass.course = new Object();
     }
 
     $scope.addClass = function () {
@@ -69,18 +47,14 @@ app.controller('mainCtrl', function ($scope, $http) {
             data: {
                 Id: $scope.selectedClass.id,
                 SemesterId: $scope.selectedSemester.Id,
-                CourseId: $scope.selectedClass.Course.Id,
+                CourseName: $scope.selectedClass.CourseName,
+                CourseCode: $scope.selectedClass.CourseCode,
                 Instructor: $scope.selectedClass.Instructor
             }
         }).then(
             function success(response) {
                 var result = response.data;
-                for (i = 0; i < $scope.courses.length; i++) {
-                    if ($scope.courses[i].Id == result.CourseId) {
-                        result.Course = $scope.courses[i]
-                        break;
-                    }
-                }
+
                 $scope.classes.push(result);
             }, function failure() {
 

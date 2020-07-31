@@ -12,8 +12,6 @@ namespace CS_ABET.Persistence
 
         public virtual DbSet<Semester> Semesters { get; set; }
 
-        public virtual DbSet<Course> Courses { get; set; }
-
         public virtual DbSet<Class> Classes { get; set; }
 
         public virtual DbSet<Review> Reviews { get; set; }

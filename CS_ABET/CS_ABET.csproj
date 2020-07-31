@@ -326,12 +326,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\ClassController.cs" />
-    <Compile Include="Controllers\Api\CourseController.cs" />
     <Compile Include="Controllers\Api\ReviewController.cs" />
     <Compile Include="Controllers\Api\SemesterController.cs" />
     <Compile Include="Controllers\BaseEC.cs" />
     <Compile Include="Controllers\Enterprise\ClassEC.cs" />
-    <Compile Include="Controllers\Enterprise\CourseEC.cs" />
     <Compile Include="Controllers\Enterprise\ReviewEC.cs" />
     <Compile Include="Controllers\Enterprise\SemesterEC.cs" />
     <Compile Include="Global.asax.cs">
@@ -340,11 +338,9 @@
     <Compile Include="Persistence\AbetContext.cs" />
     <Compile Include="Persistence\DbMock.cs" />
     <Compile Include="Persistence\DTO\ClassDto.cs" />
-    <Compile Include="Persistence\DTO\CourseDto.cs" />
     <Compile Include="Persistence\DTO\ReviewDto.cs" />
     <Compile Include="Persistence\DTO\SemesterDto.cs" />
     <Compile Include="Persistence\Models\Class.cs" />
-    <Compile Include="Persistence\Models\Course.cs" />
     <Compile Include="Persistence\Models\Review.cs" />
     <Compile Include="Persistence\Models\Semester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

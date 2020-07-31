@@ -52,7 +52,7 @@
         <div ng-show="!addingSemester && selectedSemester !== undefined">
             <div style="float:left;width:40%">
                 <div style="width:100%;display:table-row" ng-repeat="class in classes" ng-show="selectedSemester !== undefined">
-                    <div ng-click="selectClass(class)" style="float:left;margin:15px">{{class.Course.CourseCode}} - {{class.Course.CourseName}}</div>
+                    <div ng-click="selectClass(class)" style="float:left;margin:15px">{{class.CourseCode}} - {{class.CourseName}}</div>
                     <button class="button" style="float:left;margin-left:5px;margin-top:15px;padding:0px" ng-click="removeClass(class.Id)"><i class="fas fa-window-close"></i></button>
                 </div>
                 <div style="width:100%;display:table-row">
@@ -67,12 +67,12 @@
                 <div style="display:table-row;margin-top:10px">
                     <div>
                         <label style="width:30%" for="code">Class Code:</label>
-                        <input style="width:100%" id="code" ng-model="selectedClass.Course.CourseCode" />
+                        <input style="width:100%" id="code" ng-model="selectedClass.CourseCode" />
                     </div>
                 </div>
                 <div style="display:table-row;margin-top:10px">
                     <label style="width:30%" for="className">Class Name:</label>
-                    <input style="width:100%" id="className" ng-model="selectedClass.Course.CourseName" />
+                    <input style="width:100%" id="className" ng-model="selectedClass.CourseName" />
                 </div>
 
                 <div style="display:table-row;margin-top:10px">

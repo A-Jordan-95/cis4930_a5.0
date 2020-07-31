@@ -23,9 +23,10 @@ namespace CS_ABET.Controllers.Enterprise
                     results = await db.Classes.Where(s => s.SemesterId == SemesterId)
                     .Select(s => 
                     new ClassDto { Id = s.Id, 
-                        CourseId = s.CourseId, 
-                        SemesterId = s.SemesterId, 
-                        Instructor = s.Instructor }).ToListAsync();
+                        SemesterId = s.SemesterId,
+                        CourseCode = s.CourseCode,
+                        CourseName = s.CourseName,
+                        Instructor = s.Instructor, }).ToListAsync();
                 }
                 catch (Exception e)
                 {
@@ -44,7 +45,8 @@ namespace CS_ABET.Controllers.Enterprise
                 {
                     Id = classDto.Id,
                     SemesterId = classDto.SemesterId,
-                    CourseId = classDto.CourseId,
+                    CourseCode = classDto.CourseCode,
+                    CourseName = classDto.CourseName,
                     Instructor = classDto.Instructor,
                 };
                 db.Classes.AddOrUpdate(c);
@@ -53,8 +55,9 @@ namespace CS_ABET.Controllers.Enterprise
                 return new ClassDto
                 {
                     Id = c.Id,
-                    CourseId = c.CourseId,
                     SemesterId = c.SemesterId,
+                    CourseCode = c.CourseCode,
+                    CourseName = c.CourseName,
                     Instructor = c.Instructor
                 };
             }
@@ -68,13 +71,15 @@ namespace CS_ABET.Controllers.Enterprise
                 {
                     Id = classDto.Id,
                     SemesterId = classDto.SemesterId,
-                    CourseId = classDto.CourseId,
+                    CourseCode = classDto.CourseCode,
+                    CourseName = classDto.CourseName,
                     Instructor = classDto.Instructor
                 });
                 db.SaveChanges();
                 return new ClassDto { Id = result.Id,
-                        CourseId = result.CourseId,
                         SemesterId = result.SemesterId,
+                        CourseCode = result.CourseCode,
+                        CourseName = result.CourseName,
                         Instructor = result.Instructor  };
             }
         }
@@ -90,8 +95,9 @@ namespace CS_ABET.Controllers.Enterprise
                 return new ClassDto
                 {
                     Id = c.Id,
-                    CourseId = c.CourseId,
                     SemesterId = c.SemesterId,
+                    CourseCode = c.CourseCode,
+                    CourseName = c.CourseName,
                     Instructor = c.Instructor
                 }; ;
             }

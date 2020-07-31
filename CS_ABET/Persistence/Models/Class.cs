@@ -11,11 +11,13 @@ namespace CS_ABET.Persistence.Models
         [Key]
         public int Id { get; set; }
 
-        public int CourseId { get; set; }
-
         public int SemesterId { get; set; }
 
         public string Instructor { get; set; }
+
+        public string CourseCode { get; set; }
+
+        public string CourseName { get; set; }
 
     }
 }
