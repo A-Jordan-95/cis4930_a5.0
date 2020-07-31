@@ -13,3 +13,5 @@
       
     - Anthony Micciche:
       - work performed:
+        - Integrated our index.html page from a4 into a5
+        - Removed everything Course related, and "merged" the member data of Course into Class. Changes propogarted throught HTML, JS, DTO, EC, and the Database.
