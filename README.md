@@ -10,6 +10,7 @@
         - Added relevant backend controllers/classes/database table for reviews
         - added classId member data to reviews class to create connection between reviews and classes
         - removed enrollment information from front end of application
+        - added app.js functions for reviews
       
     - Anthony Micciche:
       - work performed:
