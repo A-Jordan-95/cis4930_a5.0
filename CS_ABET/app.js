@@ -65,6 +65,46 @@ app.controller('mainCtrl', function ($scope, $http) {
         $scope.addingClass = false;
     }
 
+    $scope.selectReview = function (rv) {
+        $scope.addingReview = false;
+        $scope.selectedReview = rv;
+    }
+
+    $scope.addReview = function () {
+
+        $http({
+            method: "POST",
+            url: 'api/Review/AddOrUpdate',
+            data: {
+                Id: $scope.selectedReview.id,
+                ClassId: $scope.selectedClass.Id,
+                Rating: $scope.selectedReview.Rating,
+                Text: $scope.selectedReview.Text,
+            }
+        }).then(
+            function success(response) {
+                var result = response.data;
+
+                $scope.reviews.push(result);
+            }, function failure() {
+
+            }
+        );
+
+        $scope.selectedReview = undefined;
+        $scope.addingReview = false;
+    }
+
+    $scope.showNewReview = function () {
+        $scope.selectedReview = undefined;
+        $scope.addingReview = true;
+    }
+
+    $scope.cancelAddReview = function () {
+        $scope.selectedReview = undefined;
+        $scope.addingReview = false;
+    }
+
     $scope.cancelAddClass = function () {
         $scope.selectedClass = undefined;
         $scope.addingClass = false;
@@ -153,4 +193,34 @@ app.controller('mainCtrl', function ($scope, $http) {
 
         
     }
+
+    $scope.removeReview = function (id) {
+
+        $http({
+            method: 'GET',
+            url: 'api/Review/Remove/' + id
+        }).then(
+            function success(response) {
+                var indexToDelete = -1;
+                for (i = 0; i < $scope.reviews.length; i++) {
+                    if ($scope.reviews[i].Id === id) {
+                        indexToDelete = i;
+                        break;
+                    }
+                }
+                if (indexToDelete >= 0) {
+                    $scope.reviews.splice(indexToDelete, 1);
+                }
+
+                if ($scope.selectedReview !== undefined && $scope.selectedReview.Id == id) {
+                    $scope.selectedReview = undefined;
+                }
+            }, function failure() {
+
+            }
+        );
+
+
+    }
+
 });

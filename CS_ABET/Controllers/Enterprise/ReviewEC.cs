@@ -25,7 +25,7 @@ namespace CS_ABET.Controllers.Enterprise
                     new ReviewDto
                     {
                         Id = s.Id,
-                        RatingOutOfFive = s.RatingOutOfFive,
+                        Rating = s.Rating,
                         ClassId = s.ClassId,
                         ReviewText = s.ReviewText
                     }).ToListAsync();
@@ -50,7 +50,7 @@ namespace CS_ABET.Controllers.Enterprise
                     new ReviewDto
                     {
                         Id = s.Id,
-                        RatingOutOfFive = s.RatingOutOfFive,
+                        Rating = s.Rating,
                         ClassId = s.ClassId,
                         ReviewText = s.ReviewText
                     }).ToListAsync();
@@ -72,7 +72,7 @@ namespace CS_ABET.Controllers.Enterprise
                         new Review
                         {
                             Id = reviewDto.Id,
-                            RatingOutOfFive = reviewDto.RatingOutOfFive,
+                            Rating = reviewDto.Rating,
                             ClassId = reviewDto.ClassId,
                             ReviewText = reviewDto.ReviewText
                         });
@@ -90,7 +90,7 @@ namespace CS_ABET.Controllers.Enterprise
                 var result = db.Reviews.Remove(new Review
                 {
                     Id = reviewDto.Id,
-                    RatingOutOfFive = reviewDto.RatingOutOfFive,
+                    Rating = reviewDto.Rating,
                     ClassId = reviewDto.ClassId,
                     ReviewText = reviewDto.ReviewText
                 });
@@ -98,10 +98,21 @@ namespace CS_ABET.Controllers.Enterprise
                 return new ReviewDto
                 {
                     Id = result.Id,
-                    RatingOutOfFive = reviewDto.RatingOutOfFive,
+                    Rating = reviewDto.Rating,
                     ClassId = reviewDto.ClassId,
                     ReviewText = reviewDto.ReviewText
                 };
+            }
+        }
+
+        public async Task<Review> RemoveById(int id)
+        {
+            using (var db = new AbetContext())
+            {
+                var toRemove = db.Reviews.FirstOrDefault(s => s.Id == id);
+                db.Reviews.Remove(toRemove);
+                await db.SaveChangesAsync();
+                return toRemove;
             }
         }
     }

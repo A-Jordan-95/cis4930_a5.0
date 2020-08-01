@@ -3,3 +3,12 @@ C:\Users\cornf_000\Source\Repos\cis4930_a5.0\ABET_DB\bin\Debug\ABET_DB.dll
 C:\Users\cornf_000\Source\Repos\cis4930_a5.0\ABET_DB\bin\Debug\ABET_DB.pdb
 C:\Users\cornf_000\Source\Repos\cis4930_a5.0\ABET_DB\obj\Debug\ABET_DB.dll
 C:\Users\cornf_000\Source\Repos\cis4930_a5.0\ABET_DB\obj\Debug\ABET_DB.pdb
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\bin\Debug\ABET_DB.dacpac
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\bin\Debug\ABET_DB.dll
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\bin\Debug\ABET_DB.pdb
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\obj\Debug\Model.xml
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\obj\Debug\refactor.xml
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\obj\Debug\postdeploy.sql
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\obj\Debug\predeploy.sql
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\obj\Debug\ABET_DB.dll
+C:\Users\alexr\source\repos\cis4930_a5.0\ABET_DB\obj\Debug\ABET_DB.pdb

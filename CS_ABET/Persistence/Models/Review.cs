@@ -12,7 +12,7 @@ namespace CS_ABET.Persistence.Models
 
         public int ClassId { get; set; }
 
-        public int RatingOutOfFive { get; set; }
+        public int Rating { get; set; }
 
         public string ReviewText { get; set; }
     }

@@ -22,5 +22,19 @@ namespace CS_ABET.Controllers.Api
         {
             return Ok(await new ReviewEC().Get());
         }
+
+        [HttpPost]
+        [Route("AddOrUpdate")]
+        public async Task<IHttpActionResult> AddOrUpdate([FromBody] ReviewDto review)
+        {
+            return Ok(await new ReviewEC().AddOrUpdate(review));
+        }
+
+        [HttpGet]
+        [Route("RemoveById/{id}")]
+        public async Task<IHttpActionResult> RemoveById(int id)
+        {
+            return Ok(await new ReviewEC().RemoveById(id));
+        }
     }
 }
