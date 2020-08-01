@@ -1,5 +1,4 @@
-﻿﻿﻿
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -20,10 +19,9 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         .button-bordered {
             background-color: white;
-            border: thin;
+            border:thin;
             color: black;
             padding: 15px 32px;
             text-align: center;
@@ -32,14 +30,13 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         .menu-item {
             cursor: default;
         }
     </style>
     <div ng-app="ABET" ng-controller="mainCtrl">
         <h1>Anthony and Alex's Mondo Course Review System</h1>
-        <div style="border-bottom:solid">
+        <div style="border-bottom:solid">           
             <div ng-repeat="semester in semesters">
                 <div ng-click="selectSemester(semester)" style="float:left;margin:15px;padding:3px">
                     <div class="menu-item" style="float:left;margin-right:5px">{{semester.Name}} </div>
@@ -67,7 +64,7 @@
                 <h4> Reviews for {{selectedClass.CourseName}} with {{selectedClass.Instructor}}: </h4>
                 <div style="float:left;width:40%">
                     <div style="width:100%;display:table-row" ng-repeat="review in reviews | filter:{ClassId : selectedClass.Id}">
-                        <div style="float:left;margin:15px">{{review.Rating}} / 5 - {{review.Text}}</div>
+                        <div  style="float:left;margin:15px">{{review.Rating}} / 5 - {{review.Text}}</div>
                         <button class="button" style="float:left;margin-left:5px;margin-top:15px;padding:0px" ng-click="removeReview(review.Id)"><i class="fas fa-window-close"></i></button>
                     </div>
                     <div ng-click="showNewReview()" style="float:left;margin:15px;padding:3px">
@@ -91,7 +88,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div style="float:left;width:60%;margin-top:15px" ng-show="addingClass">
                 <h4> Add a class to {{selectedSemester.Name}} </h4>
                 <div style="display:table-row;margin-top:10px">
